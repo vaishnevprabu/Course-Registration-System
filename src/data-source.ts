@@ -9,13 +9,15 @@ dotenv.config();
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
+
 console.log("Database Config:", {
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
-  password: "*******",
+  password: "*******",  
   database: process.env.DB_NAME,
 });
+
 
 export const AppDataSource = new DataSource({
   type: "mysql",
@@ -26,6 +28,15 @@ export const AppDataSource = new DataSource({
   database: process.env.DB_NAME || "default_db",
   entities: [Admin, Course, Department],
   migrations: isDevelopment ? ["src/migrations/*.ts"] : ["dist/migrations/*.js"],
-  synchronize: isDevelopment,
+  synchronize: isDevelopment, 
   logging: isDevelopment,
 });
+
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((error) => {
+    console.error("Error during Data Source initialization:", error);
+  });

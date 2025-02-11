@@ -6,11 +6,19 @@ const router = express.Router();
 const adminController = new AdminController();
 
 router.post('/department', authenticateToken, (req, res) => {
-    adminController.createDepartment(req, res);
+  adminController.createDepartment(req, res);
 });
 
 router.post('/course', authenticateToken, (req, res) => {
-    adminController.createCourse(req, res);
+  adminController.createCourse(req, res);
 });
+
+
+import { Request, Response } from 'express';
+
+router.get('/', (req: Request, res: Response): void => {
+  res.status(200).json({ message: "Admin route is working" });
+});
+
 
 export default router;

@@ -5,7 +5,7 @@ import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
 import { AppDataSource } from './data-source';
 
-dotenv.config();
+dotenv.config(); 
 
 const app = express();
 app.use(express.json());
